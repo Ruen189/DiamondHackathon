@@ -74,15 +74,6 @@ body {
   overflow-y: auto;
 }
 
-.header {
-  background: #1e2a38;
-  color: #fff;
-  border-radius: 10px;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
 .grid {
   display: grid;
@@ -174,4 +165,12 @@ textarea {
 .msg {
   margin-top: 8px;
   font-size: 13px;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+  margin-bottom: 15px;
 }
