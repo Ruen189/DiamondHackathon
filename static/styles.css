@@ -27,7 +27,8 @@ body {
 .layout {
   display: grid;
   grid-template-columns: 240px 1fr;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -37,6 +38,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .brand {
@@ -65,6 +69,9 @@ body {
 
 .content {
   padding: 15px;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .header {
