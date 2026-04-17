@@ -1,0 +1,38 @@
+services:
+  llama-server:
+    image: ghcr.io/ggerganov/llama.cpp:server
+    container_name: llama-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/models
+    command:
+      - -m
+      - /models/qwen-3.5-4b-q5_k_m.gguf
+      - -c
+      - ${CONTEXT_WINDOW:-200000}
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8080"
+      - --jinja
+      - --api-key
+      - local
+    restart: unless-stopped
+
+  whisper-server:
+    image: ghcr.io/ggerganov/whisper.cpp:main
+    container_name: whisper-server
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./models:/models
+    command:
+      - /app/build/bin/whisper-server
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8081"
+      - -m
+      - /models/ggml-large-v3-turbo-q8_0.bin
+    restart: unless-stopped

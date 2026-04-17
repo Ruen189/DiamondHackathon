@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>AI Создание инициативы</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #F4F6F8;
+}
+
+/* HEADER */
+.header {
+  background: #1E2A38;
+  color: white;
+  padding: 16px;
+  font-size: 18px;
+}
+
+/* GRID */
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+  padding: 15px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  margin-bottom: 15px;
+}
+
+/* INPUT */
+textarea, input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 8px;
+  box-sizing: border-box;
+}
+
+/* BUTTONS */
+.btn {
+  background: #F57C00;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.btn-secondary {
+  background: #6C7A89;
+}
+
+.tag {
+  display: inline-block;
+  background: #1E2A38;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin: 3px;
+}
+
+/* AI BOX */
+.ai-box {
+  background: #EAF3FF;
+  border-left: 4px solid #F57C00;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* TITLE */
+h3 {
+  margin-top: 0;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+🧠 AI Создание инициативы — Контекст + База знаний + Аналитика
+</div>
+
+<div class="container">
+
+  <!-- LEFT COLUMN -->
+  <div>
+
+    <!-- PROBLEM TITLE -->
+    <div class="card">
+
+      <h3>📌 Название проблемы (Problem ID)</h3>
+
+      <input placeholder="Например: Частые простои насосного оборудования">
+
+      <button class="btn btn-secondary">
+        🔍 Автоматически найти похожие кейсы
+      </button>
+
+      <div class="ai-box">
+        <b>🤖 AI нашёл похожее:</b><br><br>
+
+        • TPM: снижение простоев насосов<br>
+        • Оптимизация обслуживания агрегатов<br>
+        • Предиктивное обслуживание оборудования<br><br>
+
+        <b>💡 Рекомендация:</b><br>
+        Использовать TPM + профилактическое обслуживание
+      </div>
+
+    </div>
+
+    <!-- CONTEXT -->
+    <div class="card">
+
+      <h3>🧠 Контекст идеи</h3>
+
+      <textarea placeholder="Опиши проблему, ситуацию или идею..."></textarea>
+
+      <button class="btn">🎤 Голосовой ввод</button>
+
+      <div class="ai-box">
+        <b>AI-конспект:</b><br>
+        - Частые простои оборудования<br>
+        - Потери времени в сменах<br>
+        - Нет стандарта обслуживания
+      </div>
+
+      <button class="btn-secondary btn">
+        ⚡ Сжать и структурировать
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div>
+
+    <!-- UPLOAD / INTEGRATION -->
+    <div class="card">
+
+      <h3>📎 Подгрузка данных</h3>
+
+      <button class="btn btn-secondary">📂 Загрузить документ</button>
+      <button class="btn btn-secondary">🔗 Импорт из Jira</button>
+      <button class="btn btn-secondary">📚 Из базы знаний</button>
+
+    </div>
+
+    <!-- TEMPLATES -->
+    <div class="card">
+
+      <h3>🧠 Шаблоны</h3>
+
+      <span class="tag">6C</span>
+      <span class="tag">TPM</span>
+      <span class="tag">SMED</span>
+      <span class="tag">SOP</span>
+
+      <button class="btn">📊 Применить шаблон</button>
+
+    </div>
+
+
+
+    
+
+      
+
+      
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

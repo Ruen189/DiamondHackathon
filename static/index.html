@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AutoAI RMKD</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div id="authView" class="auth-wrap">
+    <div class="auth-card">
+      <h2>Авторизация</h2>
+      <p>Вход или регистрация по логину, email или телефону</p>
+      <input id="authIdentifier" placeholder="Логин / email / телефон">
+      <input id="authPassword" placeholder="Пароль" type="password">
+      <div class="row">
+        <button id="loginBtn" class="btn">Войти</button>
+        <button id="registerBtn" class="btn btn-secondary">Регистрация</button>
+      </div>
+      <div id="authMsg" class="msg"></div>
+    </div>
+  </div>
+
+  <div id="appView" class="layout hidden">
+    <aside class="sidebar">
+      <div class="brand">🧠 AutoAI RMKD</div>
+      <button class="menu-btn active" data-view="analysis">Окно анализа</button>
+      <button class="menu-btn" data-view="documents">Окно документы</button>
+      <button class="menu-btn" data-view="agent">Окно нейронки</button>
+      <div class="spacer"></div>
+      <button class="settings-icon" data-view="settings">⚙ Настройки</button>
+    </aside>
+
+    <main class="content">
+      <header class="header">
+        <div id="whoami"></div>
+        <button id="logoutBtn" class="btn btn-secondary small">Выйти</button>
+      </header>
+
+      <section id="analysis" class="view">
+        <div class="grid">
+          <div>
+            <div class="card">
+              <h3>Проблема (название протокола сессии)</h3>
+              <input id="problemTitle" placeholder="Например: Частые простои насосов">
+              <button id="findCasesBtn" class="btn btn-secondary">Найти похожие кейсы</button>
+            </div>
+
+            <div class="card">
+              <h3>Ввод данных (голос + файлы + контекст)</h3>
+              <textarea id="analysisContext" placeholder="Опишите контекст сессии..."></textarea>
+              <input id="audioFile" type="file" accept="audio/*">
+              <button id="transcribeBtn" class="btn">Транскрибировать аудио</button>
+              <textarea id="transcriptText" placeholder="Текст транскрипции..."></textarea>
+              <button id="extractIdeasBtn" class="btn">Выжать идеи (Qwen)</button>
+              <div id="analysisResult" class="ai-box"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <h3>Подгрузка данных</h3>
+              <input id="kbFile" type="file" accept=".txt,.md,.log">
+              <select id="kbTool">
+                <option>6С</option>
+                <option>СОП</option>
+                <option>SMED</option>
+                <option>TPM</option>
+              </select>
+              <button id="uploadKbBtn" class="btn btn-secondary">В базу знаний</button>
+              <button id="importJiraBtn" class="btn btn-secondary">Импорт из Jira SM</button>
+              <div id="jiraList" class="mini-list"></div>
+            </div>
+
+            <div class="card">
+              <h3>Похожие кейсы</h3>
+              <div id="similarCases" class="mini-list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="documents" class="view hidden">
+        <div class="grid">
+          <div class="card">
+            <h3>База документов / папки протоколов</h3>
+            <div class="row">
+              <input id="docTitle" placeholder="Название документа">
+              <select id="docFolder">
+                <option>Протоколы сессий</option>
+                <option>Паспорта проектов</option>
+                <option>Отчеты</option>
+              </select>
+            </div>
+            <div class="row">
+              <select id="docTool">
+                <option>6С</option>
+                <option>СОП</option>
+                <option>SMED</option>
+                <option>TPM</option>
+              </select>
+              <button id="createDocBtn" class="btn">Создать документ</button>
+            </div>
+            <div id="docList" class="mini-list"></div>
+          </div>
+          <div class="card">
+            <h3>Открыть документ и применить шаблон</h3>
+            <select id="templateSelect"></select>
+            <button id="applyTemplateBtn" class="btn btn-secondary">Применить шаблон</button>
+            <textarea id="docEditor" placeholder="Содержимое документа..."></textarea>
+            <button id="saveDocBtn" class="btn">Сохранить</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="agent" class="view hidden">
+        <div class="card">
+          <h3>Чат с агентом</h3>
+          <textarea id="chatPrompt" placeholder="Введите запрос..."></textarea>
+          <button id="sendPromptBtn" class="btn">Отправить</button>
+          <div id="chatAnswer" class="ai-box"></div>
+        </div>
+        <div class="card">
+          <h3>Метрики времени и скорости генерации</h3>
+          <div id="promptMetrics" class="mini-list"></div>
+        </div>
+      </section>
+
+      <section id="settings" class="view hidden">
+        <div class="card">
+          <h3>Профиль пользователя</h3>
+          <div id="profileInfo"></div>
+        </div>
+        <div class="card">
+          <h3>Метрики из технического задания</h3>
+          <ul class="plain-list">
+            <li>Сокращение подготовки и согласования документов до 80%</li>
+            <li>Снижение возвратов на доработку на 50%</li>
+            <li>Рост реализуемых проектов на 10%/год</li>
+            <li>Рост инициатив на 10%</li>
+            <li>Формирование базы знаний и шаблонов 6С/СОП/SMED/TPM</li>
+          </ul>
+        </div>
+        <div id="devSettingsCard" class="card hidden">
+          <h3>Для разработчиков (admin)</h3>
+          <label>Режим моделей</label>
+          <select id="modelModeSelect">
+            <option value="server">Сервер (по умолчанию)</option>
+            <option value="local">Локально</option>
+            <option value="api">API</option>
+          </select>
+          <button id="saveSettingsBtn" class="btn btn-secondary">Сохранить режим</button>
+          <div class="row">
+            <button id="checkServerBtn" class="btn btn-secondary">Проверить сервер</button>
+            <button id="startServerBtn" class="btn">Открыть сервер</button>
+          </div>
+          <div id="serverStatusMsg" class="msg"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
